@@ -65,9 +65,9 @@ export class UserControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createNewUserUsingPOST(mail: string, name: string, password: string, surname: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public createNewUserUsingPOST(mail: string, name: string, password: string, surname: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public createNewUserUsingPOST(mail: string, name: string, password: string, surname: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public createNewUserUsingPOST(mail: string, name: string, password: string, surname: string, observe?: 'body', reportProgress?: boolean): Observable<Users>;
+    public createNewUserUsingPOST(mail: string, name: string, password: string, surname: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Users>>;
+    public createNewUserUsingPOST(mail: string, name: string, password: string, surname: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Users>>;
     public createNewUserUsingPOST(mail: string, name: string, password: string, surname: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (mail === null || mail === undefined) {
@@ -114,7 +114,7 @@ export class UserControllerService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<any>('post',`${this.basePath}/api/users`,
+        return this.httpClient.request<Users>('post',`${this.basePath}/api/users`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,

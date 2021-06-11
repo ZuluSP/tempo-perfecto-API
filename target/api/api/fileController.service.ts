@@ -16,7 +16,7 @@ import { HttpClient, HttpHeaders, HttpParams,
 import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
-
+import { ModelFile } 										 from '../model/modelFile';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -62,9 +62,9 @@ export class FileControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createNewFileUsingPOSTForm(file: Blob, userId: number, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public createNewFileUsingPOSTForm(file: Blob, userId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public createNewFileUsingPOSTForm(file: Blob, userId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public createNewFileUsingPOSTForm(file: Blob, userId: number, observe?: 'body', reportProgress?: boolean): Observable<ModelFile>;
+    public createNewFileUsingPOSTForm(file: Blob, userId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ModelFile>>;
+    public createNewFileUsingPOSTForm(file: Blob, userId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ModelFile>>;
     public createNewFileUsingPOSTForm(file: Blob, userId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (file === null || file === undefined) {
@@ -113,7 +113,7 @@ export class FileControllerService {
             formParams = formParams.append('file', <any>file) as any || formParams;
         }
 
-        return this.httpClient.request<any>('post',`${this.basePath}/api/files`,
+        return this.httpClient.request<ModelFile>('post',`${this.basePath}/api/files`,
             {
                 body: convertFormParamsToString ? formParams.toString() : formParams,
                 params: queryParameters,
@@ -132,9 +132,9 @@ export class FileControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteFileUsingDELETE(fileId: number, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public deleteFileUsingDELETE(fileId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public deleteFileUsingDELETE(fileId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public deleteFileUsingDELETE(fileId: number, observe?: 'body', reportProgress?: boolean): Observable<ModelFile>;
+    public deleteFileUsingDELETE(fileId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ModelFile>>;
+    public deleteFileUsingDELETE(fileId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ModelFile>>;
     public deleteFileUsingDELETE(fileId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (fileId === null || fileId === undefined) {
@@ -155,7 +155,7 @@ export class FileControllerService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<any>('delete',`${this.basePath}/api/files/${encodeURIComponent(String(fileId))}`,
+        return this.httpClient.request<ModelFile>('delete',`${this.basePath}/api/files/${encodeURIComponent(String(fileId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -171,9 +171,9 @@ export class FileControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getFilesUsingGET(observe?: 'body', reportProgress?: boolean): Observable<Array<any>>;
-    public getFilesUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<any>>>;
-    public getFilesUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<any>>>;
+    public getFilesUsingGET(observe?: 'body', reportProgress?: boolean): Observable<Array<ModelFile>>;
+    public getFilesUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<ModelFile>>>;
+    public getFilesUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<ModelFile>>>;
     public getFilesUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
@@ -191,7 +191,7 @@ export class FileControllerService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Array<any>>('get',`${this.basePath}/api/files`,
+        return this.httpClient.request<Array<ModelFile>>('get',`${this.basePath}/api/files`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

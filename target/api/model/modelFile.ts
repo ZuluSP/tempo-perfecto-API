@@ -11,26 +11,8 @@
  */
 
 export interface ModelFile { 
-    absolute?: boolean;
-    absoluteFile?: any;
-    absolutePath?: string;
-    canonicalFile?: any;
-    canonicalPath?: string;
-    directory?: boolean;
-    executable?: boolean;
-    file?: boolean;
-    freeSpace?: number;
-    hidden?: boolean;
     id?: number;
-    lastModified?: number;
     name?: string;
-    parent?: string;
-    parentFile?: any;
-    path?: string;
-    readable?: boolean;
     ruta?: string;
-    totalSpace?: number;
-    usableSpace?: number;
     userId?: number;
-    writable?: boolean;
 }
